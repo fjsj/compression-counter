@@ -1,0 +1,28 @@
+archive_types = [".zip", ".rar", ".tar.gz" ... and many more]
+search_urls = List(page_1_url, page_2_url ... page_9_url)
+project_names = List()
+extension_counter = Counter()
+
+for url in search_urls:
+  visit url:
+    for project_name in (all project names in the page):
+      append project_name to project_names
+
+for project_name in project_names:
+  project_ext_counter = Counter()
+  file_queue = Queue()
+  generate project_root_url with project_name and append to file_queue
+  
+  while file_queue is not empty:
+    url = next url from file_queue
+    visit url:
+      for file_url in (all project files urls in the page):
+        if file_url is file:
+          if file_url ends with any extension in archive_types:
+            count file_url extension and increment it on project_ext_counter
+        else if file_url is folder:
+          add folder to file_queue to visit later
+
+  get highest count extension in project_ext_counter and increment it on extension_counter
+
+result is extension_counter
